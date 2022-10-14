@@ -1,5 +1,5 @@
 function reverse(message: string): string {
-    return message.split('').reverse().join('');
+	return message.split('').reverse().join('');
 }
 
-console.log(reverse("Hello TypeScript!"))
+console.log(reverse('Hello TypeScript!'));
