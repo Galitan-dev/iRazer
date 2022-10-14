@@ -10,9 +10,11 @@
   "dependencies": {
     "node-addon-api": "^5.0.0",
     "system-input": "^0.7.0",
-    "tinycolor2": "^1.4.2"
+    "tinycolor2": "^1.4.2",
+    "tsconfig-paths": "^4.1.0"
   },
   "devDependencies": {
+    "@types/node": "^18.8.5",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "eslint": "^8.25.0",
@@ -26,10 +28,11 @@
   },
   "gypfile": true,
   "scripts": {
-    "dev": "nodemon",
+    "dev": "nodemon -r ts-node",
     "lint:ts": "eslint --ext \".js,.ts\" --ignore-path .gitignore",
     "lint:prettier": "prettier --config .prettierrc 'src/**/*.?s' --check",
     "lint": "yarn lint:ts && yarn lint:prettier",
-    "lint:fix": "yarn lint:ts --fix && yarn lint:prettier --write"
+    "lint:fix": "yarn lint:ts --fix && yarn lint:prettier --write",
+    "build": "yarn tsc"
   }
 }
