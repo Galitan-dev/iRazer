@@ -9,7 +9,8 @@
   "private": true,
   "dependencies": {
     "node-addon-api": "^5.0.0",
-    "system-input": "^0.7.0"
+    "system-input": "^0.7.0",
+    "tinycolor2": "^1.4.2"
   },
   "devDependencies": {
     "node-gyp": "^8.2.0",

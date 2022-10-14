@@ -55,8 +55,22 @@ class RazerKeyboardDevice extends RazerDevice {
         switch (mode) {
             case 'wave': return addon.kbdSetModeWave(this.internalId, 1); 
             case 'spectrum': return addon.kbdSetModeSpectrum(this.internalId);
+            case 'custom': return addon.kbdSetModeCustom(this.internalId);
             default: return addon.kbdSetModeNone(this.internalId); 
         }
+    }
+
+    /** @param {() => [][]} callback */
+    startAnimation(callback) {
+        const self = this;
+        setInterval(function () {
+            const rows = callback();
+            for (const [y, row] of rows.entries()) {
+                const frame = new Uint8Array([y, 0, self.cols - 1, row].flat(2))
+                addon.kbdSetCustomFrame(self.internalId, frame);
+            }
+            self.setMode('custom')
+        }, 100);
     }
 
     /**
