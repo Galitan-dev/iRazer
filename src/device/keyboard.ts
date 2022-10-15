@@ -1,4 +1,10 @@
-import { kbdSetModeCustom, kbdSetModeNone, kbdSetModeSpectrum } from 'driver';
+import KeyboardAnimation from 'animation/keyboard';
+import {
+	kbdSetCustomFrame,
+	kbdSetModeCustom,
+	kbdSetModeNone,
+	kbdSetModeSpectrum
+} from 'driver';
 import { KeyboardDeviceProperties, KeyboardMode } from 'types/device';
 import RazerDevice from './device';
 
@@ -23,16 +29,24 @@ export default class RazerKeyboardDevice extends RazerDevice {
 		}
 	}
 
-	/* 	startAnimation(callback: () => [][]) {
-		setInterval(() => {
-			const rows = callback();
-			for (const [y, row] of rows.entries()) {
-				const frame = new Uint8Array(
-					[y, 0, this.cols - 1, row].flat(2)
-				);
-				kbdSetCustomFrame(this.internalId, frame);
+	startAnimation<A extends typeof KeyboardAnimation>(
+		Animation: A,
+		frameRate = 100
+	) {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const animation = new (Animation as any)(
+			frameRate,
+			this.cols,
+			this.rows
+		) as unknown as KeyboardAnimation;
+
+		animation.start();
+
+		animation.onFrame((frame) => {
+			for (const row of frame) {
+				kbdSetCustomFrame(this.internalId, row);
 			}
 			this.setMode(KeyboardMode.Custom);
-		}, 100);
-	} */
+		});
+	}
 }
