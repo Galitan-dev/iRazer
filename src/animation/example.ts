@@ -1,7 +1,7 @@
 import tinyColor, { Instance as Color } from 'tinycolor2';
 import { KeyboardAnimationPerKey } from './keyboard';
 
-export default class KeyboardTestAnimation extends KeyboardAnimationPerKey {
+export default class KeyboardExampleAnimation extends KeyboardAnimationPerKey {
 	renderKey(x: number): Color {
 		return tinyColor(
 			`hsv(${
