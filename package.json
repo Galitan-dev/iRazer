@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "base-x": "^4.0.0",
     "node-addon-api": "^5.0.0",
     "system-input": "^0.7.0",
     "tinycolor2": "^1.4.2",

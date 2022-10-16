@@ -11,11 +11,29 @@ import RazerDevice from './device';
 export default class RazerKeyboardDevice extends RazerDevice {
 	public rows: number;
 	public cols: number;
+	public keys: number[][];
 
 	constructor(properties: KeyboardDeviceProperties, internalId: number) {
 		super(properties, internalId);
 		this.rows = properties.rows;
 		this.cols = properties.cols;
+		this.keys = this.parseKeys(properties.keys);
+	}
+
+	parseKeys(chain: number[]): number[][] {
+		const keys: number[][] = [];
+
+		let y = -1;
+		for (const key of chain) {
+			if (y < 0 || (keys[y] as number[]).length >= this.cols) {
+				keys.push([]);
+				y++;
+			}
+
+			(keys[y] as number[]).push(key);
+		}
+
+		return keys;
 	}
 
 	setMode(mode: KeyboardMode) {

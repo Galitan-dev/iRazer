@@ -11,6 +11,7 @@ export interface DeviceProperties {
 export interface KeyboardDeviceProperties extends DeviceProperties {
 	rows: number;
 	cols: number;
+	keys: number[];
 }
 
 export enum KeyboardMode {
