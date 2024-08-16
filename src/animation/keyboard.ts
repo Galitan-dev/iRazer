@@ -26,6 +26,11 @@ export default abstract class KeyboardAnimation extends Animation<
 
 		const frame = this.render(base);
 
+		for (let y = 0; y < this.rows; y++) {
+			frame[y] =
+				frame[y]?.filter((_, x) => x >= 0 && x < this.cols) ?? [];
+		}
+
 		const flatFrame: FlatKeyboardFrame = frame.map(
 			(row, y) =>
 				new Uint8Array(
